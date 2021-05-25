@@ -176,13 +176,15 @@ import Chat from './models/Chat';
 import User from './models/User';
 ```
 
-Далі свторюємо асинхронну функцію `createUser`, яка приймає параметр userData ```js 
+Далі свторюємо асинхронну функцію `createUser`, яка приймає параметр userData 
+```js 
 async function createUser(userData) { }
 ```
 
 В середині створюємо дві  `let` змінні та чотири `const` змінні - данні користувача
 
 ```js
+
 async function createUser(userData) {
     const { userId, name, birthdayDate, chatId } = userData;
     let chat = await Chat.findOne({ chatId: chatId });
@@ -545,10 +547,6 @@ const timerBotFunc = () => {
 module.exports = timerBotFunc
 
 ```
-
-![image](https://user-images.githubusercontent.com/62243357/117887921-17ecfb00-b2ba-11eb-8017-b78bd1a189e8.png)
-![image](https://user-images.githubusercontent.com/62243357/117887976-2e935200-b2ba-11eb-93db-925177a8a570.png)
-
 ## 3. Етап тестування
 На етапі тестування потрібно виявити усі неточності та баги роботи програми. Командою `npm run dev` у терміналі запускаємо бота та парсер. Переходимо у телеграм.
 
