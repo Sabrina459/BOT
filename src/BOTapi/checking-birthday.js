@@ -6,6 +6,10 @@ const mongoose = require("mongoose");
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 //'dd-mm-yyyy'
+/**
+ *
+ * @returns {string}
+ */
 const getCurrentDate = () => {
     const date = new Date()
     let month = date.getMonth() + 1
@@ -19,12 +23,17 @@ const getCurrentDate = () => {
     }
     return `${day}-${month}`
 }
+/**
+ *
+ * @returns {Promise<void>}
+ */
 const sendMessagesEveryDay = async () => {
     const chats = await Chat.find().populate({path: 'users'})
     for (let chatIndex = 0; chatIndex < chats.length; chatIndex++) {
         const chat = chats[chatIndex]
         // console.log(chat.users)
         const currentDate = getCurrentDate()
+        // const testData = '30-10'
         chat.users.forEach((user) => {
             if (user.birthdayDate.slice(0,5) === currentDate) {
                 try {
@@ -37,7 +46,9 @@ const sendMessagesEveryDay = async () => {
 
     }
 }
-
+/**
+ *
+ */
 const timerBotFunc = () => {
     const timer = setInterval(sendMessagesEveryDay, 8640000000)
     console.log('timer was set')
