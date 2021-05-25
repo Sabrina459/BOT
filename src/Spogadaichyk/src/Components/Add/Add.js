@@ -2,15 +2,21 @@ import { Text, useText, useBotContext } from '@urban-bot/core';
 import React from 'react';
 import { useState } from 'react';
 import { createUser } from '../mongodb/botController';
+import { useRouter } from '@urban-bot/core';
 
 function Add() {
+    const { navigate } = useRouter();
     const [answer, setAnswer] = useState('Input your birthday data in format dd-mm-yyyy');
     const { chat } = useBotContext();
 
     const chatId = chat.id;
     const userId = chat.username;
     const name = chat.firstName
-
+    /**
+     *
+     * @param dateString
+     * @returns {boolean}
+     */
     const isValidDate = (dateString) => {
         try {
             const date = dateString.split('-');
@@ -28,7 +34,10 @@ function Add() {
             return false;
         }
     };
-
+    /**
+     *
+     * @returns {string}
+     */
     const getCurrentDate = () => {
         const date = new Date()
         let month = date.getMonth() + 1
@@ -42,11 +51,21 @@ function Add() {
         }
         return `${day}-${month}`
     }
-
+    /**
+     *
+     */
     useText(async ({ text }) => {
         // setAnswer(text);
         const textIsValid = isValidDate(text);
         if (textIsValid) {
+            const currentDate = await getCurrentDate()
+            if (text.slice(0,5) === currentDate){
+                try {
+                    setAnswer(`Сегодня др у ${name}, @${userId}, поздравляем`)
+                } catch (error) {
+                    console.log(error)
+                }
+            }
             const data = await createUser({
                 userId,
                 name: name,
@@ -54,16 +73,10 @@ function Add() {
                 chatId
             })
             setAnswer(data.message)
-            const currentDate = await getCurrentDate()
-            if (text.slice(0,5) ===currentDate){
-                try {
-                    setAnswer(`Сегодня др у ${name}, @${userId}, поздравляем`)
-                } catch (error) {
-                    console.log(error)
-                }
-            }
+            navigate('/start')
         } else {
             setAnswer('There is an error in your data. \n Please check your data format (dd-mm-yyyy)')
+            navigate('/start')
         }
     });
 
