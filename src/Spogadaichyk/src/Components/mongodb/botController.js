@@ -1,7 +1,11 @@
 import Chat from './models/Chat';
 import User from './models/User';
 
-
+/**
+ *
+ * @param userData
+ * @returns {Promise<{message: string}|{chat: *, message: string, user: *}>}
+ */
 export async function createUser(userData) {
     const { userId, name, birthdayDate, chatId } = userData;
     let chat = await Chat.findOne({ chatId: chatId });
@@ -27,6 +31,11 @@ export async function createUser(userData) {
     };
 }
 
+/**
+ *
+ * @param userId
+ * @returns {Promise<{message: string}>}
+ */
 export async function deleteUser(userId){
     try{
         let user = await User.findOne({userId: userId})
