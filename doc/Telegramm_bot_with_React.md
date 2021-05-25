@@ -573,3 +573,9 @@ module.exports = timerBotFunc
 Робимо висновок з отриманих результатів, що бот працює коректно. На цьому завершуємо етап розробки.
 
 ![Congrats](https://www.reef2reef.com/proxy.php?image=https%3A%2F%2Fmedia1.giphy.com%2Fmedia%2FslOhiKAVFgwr6%2F200.gif&hash=6bec20eedd16467ce1fa932ae7ec6e31)
+
+## Матеріал підготувала
+
+* *студентка групи ІВ-91 Сайко Сабріна* - [Sabrina459](https://github.com/Sabrina459)
+
+><a href="https://github.com/Sabrina459/BOT" target="_blank">https://github.com/Sabrina459/BOT</a>
